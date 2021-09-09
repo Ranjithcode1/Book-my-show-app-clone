@@ -2,11 +2,41 @@ import React from "react";
 import { BiSearch, BiChevronDown, BiMenu } from "react-icons/bi";
 
 function NavSm() {
-  return <>sm</>;
+  return (
+    <>
+      <div className="text-white flex items-center justify-between">
+        <div>
+          <h3 className="text-xl font-bold">It All Starts Here!🤭 </h3>
+          <span className="text-gray-400 text-xs flex items-center cursor-pointer hover:text-white">
+            Chennai NCR <BiChevronDown />
+          </span>
+        </div>
+        <div className="w-7 h-7">
+          <BiSearch className="w-full h-full" />
+        </div>
+      </div>
+    </>
+  );
 }
 
 function NavMd() {
-  return <>md</>;
+  return (
+    <>
+      <div className="flex items-center w-full gap-3">
+        <div className="w-100 h-10">
+          <img src="2011021.webp" alt="logo" className="w-full h-full" />
+        </div>
+        <div className="w-full flex items-center gap-3 bg-white px-3 py-1 rounded-md">
+          <BiSearch />
+          <input
+            type="search"
+            className="w-full bg-transparent border-none focus:outline-none "
+            placeholder="Search for Movies, Events.."
+          />
+        </div>
+      </div>
+    </>
+  );
 }
 function NavLg() {
   return (
@@ -29,11 +59,11 @@ function NavLg() {
           <span className="text-gray-200 text-base flex items-center cursor-pointer hover:text-white">
             Chennai NCR <BiChevronDown />
           </span>
-          <button className='bg-red-600 text-white px-2 py-2 text-sm rounded'>
-              Sign In
+          <button className="bg-red-600 text-white px-2 py-2 text-sm rounded">
+            Sign In
           </button>
-          <div className='w-8 h-8 text-white' >
-              <BiMenu className='w-full h-full'/>
+          <div className="w-8 h-8 text-white">
+            <BiMenu className="w-full h-full" />
           </div>
         </div>
       </div>
