@@ -1,18 +1,19 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React from "react";
-import { BiSearch, BiChevronDown, BiMenu } from "react-icons/bi";
+import { BiSearch, BiChevronDown, BiMenu, BiShareAlt,BiChevronLeft } from "react-icons/bi";
 
 function NavSm() {
   return (
     <>
-      <div className="text-white flex items-center justify-between">
+      <div className="text-gray-700 flex items-center justify-between  ">
         <div>
-          <h3 className="text-xl font-bold">It All Starts Here!🤭 </h3>
-          <span className="text-gray-400 text-xs flex items-center cursor-pointer hover:text-white">
-            Chennai NCR <BiChevronDown />
-          </span>
+        <BiChevronLeft className=" w-full h-full " />
         </div>
-        <div className="w-7 h-7">
-          <BiSearch className="w-full h-full" />
+        <div>
+          <h3 className=" text-xl font-bold  ">Fast and Furious 9</h3>
+        </div>
+        <div>
+          <BiShareAlt className=" w-full h-full " />
         </div>
       </div>
     </>
@@ -24,7 +25,11 @@ function NavMd() {
     <>
       <div className="flex items-center w-full gap-3">
         <div className="w-100 h-10">
-          <img src="//in.bmscdn.com/webin/common/icons/logo.svg" alt="logo" className="w-full h-full" />
+          <img
+            src="//in.bmscdn.com/webin/common/icons/logo.svg"
+            alt="logo"
+            className="w-full h-full"
+          />
         </div>
         <div className="w-full flex items-center gap-3 bg-white px-3 py-1 rounded-md">
           <BiSearch />
@@ -44,7 +49,11 @@ function NavLg() {
       <div className="container flex mx-auto px-4 items-center justify-between">
         <div className="flex items-center w-1/2 gap-3">
           <div className="w-100 h-10">
-            <img src="//in.bmscdn.com/webin/common/icons/logo.svg" alt="logo" className="w-full h-full" />
+            <img
+              src="//in.bmscdn.com/webin/common/icons/logo.svg"
+              alt="logo"
+              className="w-full h-full"
+            />
           </div>
           <div className="w-full flex items-center gap-3 bg-white px-3 py-1 rounded-md">
             <BiSearch />
@@ -71,10 +80,10 @@ function NavLg() {
   );
 }
 
-const Navbar = () => {
+const MovieNavebar = () => {
   return (
     <>
-      <nav className="bg-Darkknight-700 px-4 py-3">
+      <nav className="bg-white border-b-2 lg:bg-Darkknight-700 lg:border-b-0 md:bg-Darkknight-700 p-4  ">
         <div className="md:hidden">
           {/* mobile screen */}
           <NavSm />
@@ -92,4 +101,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default MovieNavebar;

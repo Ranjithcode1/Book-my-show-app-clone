@@ -1,24 +1,24 @@
 import React from "react";
+
+//HOC
 import DefaultHOC from "./HOC/DefaultHOC";
+import MovieHOC from "./HOC/Movie.HOC";
 
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function HomePage() {
-  return <h1>This is Home Page</h1>;
-}
+//Pages
+import HomePage from "./Pages/Home.Page";
+import MoviePage from "./Pages/Movie.Page";
 
-function Contact() {
-  return <h1>This is Contact page</h1>
-}
+
 
 function App() {
   return (
     <>
       <DefaultHOC path="/" exact component={HomePage} />
-      <DefaultHOC path="/Contact" exact component={Contact} />
-
+      <MovieHOC  path="/movie/:id" exact component={MoviePage} />
     </>
   );
 }

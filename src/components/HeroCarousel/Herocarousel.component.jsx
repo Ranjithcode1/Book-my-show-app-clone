@@ -16,7 +16,7 @@ const HeroCarousel = () => {
     dots: true,
     autoplay: true,
     centerMode: true,
-    centerPadding: "20px",
+    centerPadding: "200px",
     slidesToShow: 1,
     infinite: true,
     slideToScroll: 1,
@@ -41,7 +41,7 @@ const HeroCarousel = () => {
       <div className="lg:hidden">
         <HeroSlider {...settings}>
           {images.map((image) => (
-            <div className="w-full h-56 md:h-80 px-1 py-2">
+            <div className="w-full h-56 md:h-80 py-3">
               <img
                 src={image}
                 alt="Hero Banner"
