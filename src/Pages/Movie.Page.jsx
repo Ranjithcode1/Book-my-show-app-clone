@@ -1,10 +1,52 @@
-import React from "react";
-import MovieHero from "../components/MovieHero/MovieHero.component";
-import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
+//icons
+import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
+
+//components
 import Cast from "../components/Cast/Cast.component";
+import PosterSlider from "../components/PosterSlider/PosterSlider.component";
+import MovieHero from "../components/MovieHero/MovieHero.component";
+
+//Context
+import { MovieContext } from "../context/Movie.context";
 
 const MoviePage = () => {
+  const { movie } = useContext(MovieContext);
+
+  const {id} = useParams();
+
+  const [cast, setCast] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [recommended, setRecommended] = useState([]);
+
+  useEffect(() => {
+    const requestCast = async () => {
+      const getCast = await axios.get(`/movie/${id}/credits`);
+      setCast(getCast.data.cast);
+    };
+    requestCast();
+  }, [id]);
+
+  useEffect(() => {
+    const requestSimilarMovies = async () => {
+      const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+      setSimilarMovies(getSimilarMovies.data.results);
+    };
+    requestSimilarMovies();
+  }, [id]);
+
+  useEffect(() => {
+    const requestRecommended = async () => {
+      const getRecommended = await axios.get(`/movie/${id}/recommendations`);
+      setRecommended(getRecommended.data.results);
+    };
+    requestRecommended();
+  }, [id]);
+
   const settingsCast = {
     infinite: false,
     speed: 500,
@@ -37,63 +79,47 @@ const MoviePage = () => {
       },
     ],
   };
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
-  const cast = [
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/vin-diesel-5007-22-12-2017-10-17-23.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/john-cena-1021-24-03-2017-15-43-30.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/tyrese-gibson-2671-24-03-2017-17-39-25.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/nathalie-emmanuel-1055032-24-03-2017-16-16-15.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/helen-mirren-808-24-03-2017-12-36-16.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/michelle-rodriguez-1471-13-10-2017-03-57-20.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-    {
-      profile_path:
-        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/vin-diesel-5007-22-12-2017-10-17-23.jpg",
-      original_name: "vin Disel",
-      character: "Dominic Toretto",
-    },
-  ];
+  
   return (
     <>
       <MovieHero />
       <div className="my-12 container px-4 lg:ml-20 lg:w-2/3">
         <div className="flex flex-col items-start gap-3">
           <h1 className="text-gray-800 font-bold text-2xl">About the movie</h1>
-          <p>
-            Dom`s peaceful life with his wife Letty and son Brian is shattered
-            when Dom`s past catches up to him. The gang is up against the most
-            skilled assassin and high-performance driver - his little brother
-            Jakob.
-          </p>
+          <p>{movie.overview}</p>
         </div>
 
         <div className="my-8">
@@ -150,10 +176,28 @@ const MoviePage = () => {
             ))}
           </Slider>
         </div>
-        <div className="my-8" >
-          <hr/>
+        <div className="my-8">
+          <hr />
         </div>
-
+        <div className="my-8">
+          <PosterSlider
+            config={settings}
+            title="You might also like"
+            posters={similarMovies}
+            isDark={false}
+          />
+        </div>
+        <div className="my-8">
+          <hr />
+        </div>
+        <div className="my-8">
+          <PosterSlider
+            config={settings}
+            title="BMX Exclusive"
+            posters={recommended}
+            isDark={false}
+          />
+        </div>
       </div>
     </>
   );

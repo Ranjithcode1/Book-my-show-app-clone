@@ -1,106 +1,39 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HeroCarousel from "../components/HeroCarousel/Herocarousel.component";
 import EntertainmentCardSlider from "../components/Entertainment/EntertainmentCard.component";
 import PosterSlider from "../components/PosterSlider/PosterSlider.component";
+import axios from "axios";
 
 function HomePage() {
-  const Recommendedmovies = [
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MThrIGxpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70/et00097273-jsjnrkupnh-portrait.jpg",
-      title: "Fast and Furious 9 ",
-      subtitle: "Action/Adventure/Fantasy",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NTAlICA5MDMgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00137405-hgayttvlqg-portrait.jpg",
-      title: "Fast and Furious 9 ",
-      subtitle: "Action/Adventure/Fantasy",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-N2sgbGlrZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00122449-cpycuxwnzs-portrait.jpg",
-      title: "Fast and Furious 9 ",
-      subtitle: "Action/Adventure/Fantasy",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-OTElICAyOGsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00122566-bgabnepvfd-portrait.jpg",
-      title: "Fast and Furious 9 ",
-      subtitle: "Action/Adventure/Fantasy",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzglICAxMmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-cmljhpnhcd-portrait.jpg",
-      title: "Fast and Furious 9 ",
-      subtitle: "Action/Adventure/Fantasy",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzklICAyNWsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00117102-gukaentnqs-portrait.jpg",
-      title: "Fast and Furious 9 ",
-      subtitle: "Action/Adventure/Fantasy",
-    },
-  ];
-  const premieremovies = [
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00132338-brjalettes-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00301282-dnzbnayacy-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00312838-ddktmuquza-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00311345-crxxxkjsxb-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00122511-cbwsbnggyc-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00122511-cbwsbnggyc-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-  ];
-  const OnlineStreamEvents = [
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-RnJpLCAxMCBTZXAgb253YXJkcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00313611-xqqvejluju-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-VGh1LCAzMCBTZXA%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00304009-nsnwqmxhqm-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-VGh1LCAzMCBTZXA%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00304004-cpfnbdagcz-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-VGh1LCAzMCBTZXA%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00304005-lnegmxafyd-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-VHVlLCAxNCBTZXA%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00313022-ecbcdmnjgg-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-    {
-      src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-RnJpLCAxMCBTZXAgb253YXJkcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00137587-rjbdnlgyda-portrait.jpg",
-      title: "The Nest ",
-      subtitle: "English",
-    },
-  ];
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
+  const [premiereMovies, setPremiereMovies] = useState([]);
+  const [onlineStreamEvents, setOnlineStreamEvents] = useState([]);
+
+  useEffect(() => {
+    const requestPopularMovie = async () => {
+      const getPopularMovies = await axios.get("/movie/popular");
+      setRecommendedMovies(getPopularMovies.data.results);
+    };
+    requestPopularMovie();
+  }, []);
+
+  useEffect(() => {
+    const requestTopRatedMovie = async () => {
+      const getTopRatedMovie = await axios.get("/movie/top_rated");
+      setPremiereMovies(getTopRatedMovie.data.results);
+    };
+    requestTopRatedMovie();
+  }, []);
+
+  useEffect(() => {
+    const requestUpComingMovie = async () => {
+      const getUpComingMovie = await axios.get("/movie/upcoming");
+      setOnlineStreamEvents(getUpComingMovie.data.results);
+    };
+    requestUpComingMovie();
+  }, []);
+
   return (
     <>
       <HeroCarousel />
@@ -111,11 +44,19 @@ function HomePage() {
         <EntertainmentCardSlider />
       </div>
 
-      <div className="container mx-auto px-4 md:px-20 my-8">
+      <div className="container mx-auto px-4 my-8 md:px-20 md:my-20 ">
+        <img
+          src="https://in.bmscdn.com/discovery-catalog/collections/tr:w-1440,h-120/lead-in-v3-collection-202102040828.png"
+          alt="handpick poster"
+          className=" w-full h-full"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-20 ">
         <PosterSlider
           title="Recommended Movies"
           subtitle="List of recommended movies"
-          posters={Recommendedmovies}
+          posters={recommendedMovies}
           isDark={false}
         />
       </div>
@@ -129,24 +70,21 @@ function HomePage() {
             />
           </div>
           <PosterSlider
-          title="Premiere"
-          subtitle="Watch new movies at home, every friday"
-          posters={premieremovies}
-          isDark={true}
-        />
+            title="Premiere"
+            subtitle="Watch new movies at home, every friday"
+            posters={premiereMovies}
+            isDark={true}
+          />
         </div>
-        
       </div>
       <div className="container mx-auto px-4 md:px-20 my-8">
         <PosterSlider
           title="Online streaming events"
           subtitle=""
-          posters={OnlineStreamEvents}
+          posters={onlineStreamEvents}
           isDark={false}
         />
       </div>
-
-        
     </>
   );
 }

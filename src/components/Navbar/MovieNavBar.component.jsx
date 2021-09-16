@@ -1,8 +1,14 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import React from "react";
+import React,{useContext} from "react";
 import { BiSearch, BiChevronDown, BiMenu, BiShareAlt,BiChevronLeft } from "react-icons/bi";
 
+//Context
+
+import {MovieContext} from '../../context/Movie.context'
+
 function NavSm() {
+
+  const {movie} = useContext(MovieContext);
   return (
     <>
       <div className="text-gray-700 flex items-center justify-between  ">
@@ -10,7 +16,7 @@ function NavSm() {
         <BiChevronLeft className=" w-full h-full " />
         </div>
         <div>
-          <h3 className=" text-xl font-bold  ">Fast and Furious 9</h3>
+          <h3 className=" text-xl font-bold  ">{movie.original_title}</h3>
         </div>
         <div>
           <BiShareAlt className=" w-full h-full " />

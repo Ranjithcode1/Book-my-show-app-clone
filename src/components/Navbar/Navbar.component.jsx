@@ -56,8 +56,8 @@ function NavLg() {
           </div>
         </div>
         <div className=" flex items-center gap-3 ">
-          <span className="text-gray-200 text-base flex items-center cursor-pointer hover:text-white">
-            Chennai NCR <BiChevronDown />
+          <span className="text-gray-200 text-sm flex items-center cursor-pointer hover:text-white">
+            Chennai <BiChevronDown />
           </span>
           <button className="bg-red-500 text-white px-2 py-1 text-sm rounded">
             Sign In

@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import PaymentModal from '../PaymentModal/Payment.component'
 
 const MovieInfo = ({ movie }) => {
-  return (
+  const [isOpen, setIsOpen] = useState(false);
+  const [price, setPrice] = useState(0);
+
+  const genres = movie.genres?.map(({ name }) => name).join(", ");
+
+  const rentMovie = () => {
+    setIsOpen(true);
+    setPrice(149);
+  };
+
+  const buyMovie = () => {
+    setIsOpen(true);
+    setPrice(599);
+  };
+
+  return (  
     <>
+      <PaymentModal setIsOpen={setIsOpen} isOpen={isOpen} price={price}/>
+
       <div className="flex flex-col lg:gap-3 ">
         <h1 className="text-white lg:text-5xl font-bold">
           {movie.original_title}
         </h1>
         <div className=" text-white flex flex-col gap-5">
           <h4>4k ratings</h4>
-          <h4>English, Hindi, Tamil. Telugu</h4>
-          <h4>{movie.overview}</h4>
+          <h4>{genres}</h4>
+          <h4>
+            {movie.runtime} min • {genres} • UA • {movie.release_date}
+          </h4>
         </div>
         <div className="flex items-center gap-10 w-full my-8">
-          <button className="bg-red-500 w-full py-3 text-white font-semibold rounded-lg ">
-            Rent ₹149
+          <button
+            onClick={rentMovie}
+            className="bg-red-500 w-full py-3 text-white font-semibold rounded-lg "
+          >
+            Rent ₹ 149
           </button>
-          <button className="bg-red-500 w-full py-3 text-white font-semibold rounded-lg ">
-            Buy ₹599
+          <button
+            onClick={buyMovie}
+            className="bg-red-500 w-full py-3 text-white font-semibold rounded-lg "
+          >
+            Buy ₹ 599
           </button>
         </div>
       </div>

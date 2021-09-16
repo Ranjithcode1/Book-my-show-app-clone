@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeroSlider from "react-slick";
+import axios from "axios";
 
 //Arrow component
 import { NextArrow, PrevArrow } from "./Arrows.component";
 
 const HeroCarousel = () => {
-  const [images, setImages] = useState([
-    "https://in.bmscdn.com/promotions/cms/creatives/1629830049996_celebfiecruisewiththestarsrevised_webshowcase_1240x300_24aug.jpg",
-    "https://in.bmscdn.com/promotions/cms/creatives/1628591224466_fnbgeneric.jpg",
-    "https://in.bmscdn.com/promotions/cms/creatives/1630996503860_moviethailavi_tamil_incinemasthisfridayknowmore_webshowcase_1240x300.jpg",
-  ]);
+  const [images,setImages] = useState([]);
+
+  useEffect(  () => {
+      const requestNowPlayingMovies = async () => {
+        const getImages = await axios.get('/movie/now_playing');
+        setImages(getImages.data.results)
+      };
+
+      requestNowPlayingMovies();
+  },[]);
 
   const settingsLg = {
     arrows: true,
@@ -43,9 +49,9 @@ const HeroCarousel = () => {
           {images.map((image) => (
             <div className="w-full h-56 md:h-80 py-3">
               <img
-                src={image}
+                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="Hero Banner"
-                className="w-full h-full object-center rounded-md "
+                className="w-full h-full object-center rounded-md object-cover "
               />
             </div>
           ))}
@@ -56,9 +62,9 @@ const HeroCarousel = () => {
           {images.map((image) => (
             <div className="w-full h-96  px-2 py-3">
               <img
-                src={image}
+                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="hero Banner"
-                className="w-full h-full rounded-md object-center"
+                className="w-full h-full rounded-md object-center object-cover "
               />
             </div>
           ))}
